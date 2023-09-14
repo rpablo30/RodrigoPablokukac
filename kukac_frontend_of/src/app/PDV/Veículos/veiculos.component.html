@@ -1,0 +1,67 @@
+<div style="display: flex; justify-content: center; align-items: flex-start; min-height: 90vh;">
+  <div class="form-container" style="text-align: center; padding: 20px; border: 1px solid #2d09f5; max-width: 350px; width: 100%;">
+      <h1 style="text-align: center;">Informações sobre Veículos</h1>
+
+      <form (ngSubmit)="onSubmit()" [formGroup]="veiculoForm">
+          <div class="form-group">
+              <label for="modelo" style="font-size: 16px;">Modelo:</label>
+              <input type="text" id="modelo" name="modelo" formControlName="modelo" required
+                  style="font-size: 16px; padding: 8px; width: 100%;">
+              <div *ngIf="veiculoForm.get('modelo')?.hasError('required') && veiculoForm.get('modelo')?.touched">Este
+                  campo é obrigatório.</div>
+          </div>
+          <div class="form-group">
+              <label for="ano" style="font-size: 16px;">Ano de Fabricação:</label>
+              <input type="number" id="ano" name="ano" formControlName="anoDeFabric" min="1900" max="2099"
+                  required style="font-size: 16px; padding: 8px; width: 100%;">
+              <div *ngIf="veiculoForm.get('anoDeFabric')?.hasError('required') && veiculoForm.get('anoDeFabric')?.touched">Este
+                  campo é obrigatório.</div>
+              <div *ngIf="veiculoForm.get('anoDeFabric')?.hasError('min') && veiculoForm.get('anoDeFabric')?.touched">O
+                  ano deve ser no mínimo 1900.</div>
+              <div *ngIf="veiculoForm.get('anoDeFabric')?.hasError('max') && veiculoForm.get('anoDeFabric')?.touched">O
+                  ano deve ser no máximo 2099.</div>
+          </div>
+          <div class="form-group">
+              <label for="marca" style="font-size: 16px;">Marca:</label>
+              <input type="text" id="marca" name="marca" formControlName="marca" required
+                  style="font-size: 16px; padding: 8px; width: 100%;">
+              <div *ngIf="veiculoForm.get('marca')?.hasError('required') && veiculoForm.get('marca')?.touched">Este
+                  campo é obrigatório.</div>
+          </div>
+          <div class="form-group">
+              <label for="tipo" style="font-size: 16px;">Tipo de Veículo:</label>
+              <select id="tipo" name="tipo" formControlName="tipo" required
+                  style="font-size: 16px; padding: 8px; width: 100%;">
+                  <option [ngValue]="'carro'">Carro</option>
+                  <option [ngValue]="'moto'">Moto</option>
+              </select>
+              <div *ngIf="veiculoForm.get('tipo')?.hasError('required') && veiculoForm.get('tipo')?.touched">Este
+                  campo é obrigatório.</div>
+          </div>
+          <div class="form-group" *ngIf="veiculoForm.get('tipo')?.value === 'carro'">
+              <label for="portasCarro" style="font-size: 16px;">Número de Portas do Carro:</label>
+              <select id="portasCarro" name="portasCarro" formControlName="portas" required
+                  style="font-size: 16px; padding: 8px; width: 100%;">
+                  <option [ngValue]="null" disabled selected hidden>Escolha</option>
+                  <option [ngValue]="2">2 Portas</option>
+                  <option [ngValue]="4">4 Portas</option>
+              </select>
+              <div *ngIf="veiculoForm.get('portas')?.hasError('required') && veiculoForm.get('portas')?.touched">Este
+                  campo é obrigatório.</div>
+          </div>
+          <div class="form-group" *ngIf="veiculoForm.get('tipo')?.value === 'moto'">
+              <label for="passageiros" style="font-size: 16px;">Número de Passageiros na Moto:</label>
+              <select id="passageiros" name="passageiros" formControlName="passageiros" required
+                  style="font-size: 16px; padding: 8px; width: 100%;">
+                  <option [ngValue]="null" disabled selected hidden>Escolha</option>
+                  <option [ngValue]="1">1 Passageiro</option>
+                  <option [ngValue]="2">2 Passageiros</option>
+              </select>
+              <div *ngIf="veiculoForm.get('passageiros')?.hasError('required') && veiculoForm.get('passageiros')?.touched">Este
+                  campo é obrigatório.</div>
+          </div>
+          <br>
+          <button type="submit" style="font-size: 16px; padding: 8px; width: 100%;">Enviar</button>
+      </form>
+  </div>
+</div>
